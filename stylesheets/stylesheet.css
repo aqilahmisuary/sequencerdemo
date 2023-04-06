@@ -1,0 +1,79 @@
+html {
+    background-color: #F5F5F5;
+}
+
+.kicks,
+.snare,
+.hihat,
+.grains {
+    border-radius: 25px;
+    padding: 20px;
+    width: 30px;
+    height: 30px;
+    margin: 0.5px;
+    margin-top: 4px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+h4,
+h6,
+span,
+footer,
+#inputs {
+    
+    font-size: 24px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 26.4px;
+}
+
+#sliderSection {
+    width: 100%;
+
+}
+
+.intro {
+    width: 28%;
+    text-align: center;
+    margin: auto;
+}
+
+.inputs {
+    font-size: 20px;
+    width: 300px;
+    text-align: center;
+    margin: auto;
+    padding-top: 30px;
+}
+
+h4,
+h6,
+footer,
+p {
+    text-align: center;
+    margin-top: 28px;
+}
+
+footer {
+    margin-top: 40px;
+}
+
+button {
+    display: inline-block;
+    margin: 0 auto;
+    font-size: 18px;
+}
+
+#btns-location,
+#masterKick,
+#masterSnare,
+#masterHihat,
+#masterGranular {
+    text-align: center;
+}
+
+.mdl-layout__header--scroll .mdl-layout__header-row {
+    background-color: black;
+}
