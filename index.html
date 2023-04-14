@@ -49,6 +49,7 @@
         <div id="sliderSection">
             <p class="inputs">
                 <input type="range" id="myRange" class="mdl-slider mdl-js-slider" min="0" max="100"> Tempo <span id="tempoVal"></span>
+                <input type="range" id="delaySlider" class="mdl-slider mdl-js-slider" min="0" max="100" value="100"> Master Delay <span id="delayRange"></span>
             </p>
         </div>
     <p>
@@ -128,7 +129,8 @@
     </div>
     <p class="inputs">
         <br>
-        <input type="range" id="delaySlider" class="mdl-slider mdl-js-slider" min="0" max="100" value="100"> Delay <span id="delayRange"></span>
+        <input type="range" id="bitsSlider" class="mdl-slider mdl-js-slider" min="1" max="16" step="1"> Bits <span id="bitsRange"></span>
+        <input type="range" id="downsamplingSlider" class="mdl-slider mdl-js-slider" min="1" max="40" step="1"> Downsample <span id="downsamplingRange"></span>
     </p>
     <footer>
         <h6>This web audio sequencer is maintained by <a href="https://github.com/aqilahmisuary">aqilahmisuary</a></h6>
@@ -139,12 +141,6 @@
     </div>
   </main>
 </div>
-
-
-
-
-
-
 
 
 </body>

@@ -1,7 +1,42 @@
 window.onload = function() {
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
-  let audioContext = new AudioContext();
+  const audioContext = new AudioContext();
+
+ //EFFECTS - BITCRUSHER
+ // References 
+ // https://www.alexramsdell.com/writing/bitcrushing-in-javascript/
+ // https://github.com/GoogleChromeLabs/web-audio-samples
+
+  const parameterData = {
+    bitDepth: 2,
+    downsampling: 1
+  }
+
+  audioContext.audioWorklet.addModule('javascripts/bitcrusher.js').then(() => {
+    bitCrusherNode = new AudioWorkletNode(audioContext, 'bitcrusher', { parameterData });
+
+    // use the node's getter to get a reference to the parameters we need
+    const bitDepthParam = bitCrusherNode.parameters.get('bitDepth')
+    const downsamplingParam = bitCrusherNode.parameters.get('downsampling')
+
+    downsampling.addEventListener('input', ({ target }) => {
+        downsamplingParam.value = parseInt(target.value);
+        downsamplingRange.innerHTML = parseInt(target.value);
+    })
+  
+    bits.addEventListener('input', ({ target }) => {
+        bitDepthParam.value = parseInt(target.value);
+        bitsRange.innerHTML = parseInt(target.value);
+    })
+
+    // downsamplingParam.value = 12;
+    // bitDepthParam.value = 1;
+
+    mixGain.connect(bitCrusherNode);
+    bitCrusherNode.connect(audioContext.destination);
+  });
+
   let futureTickTime = audioContext.currentTime;
   let current16thNote = 1;
   let tempo = 120.0; //initial tempo
@@ -21,6 +56,10 @@ window.onload = function() {
   let snareDivs = document.querySelectorAll(".snare");
   let hihatDivs = document.querySelectorAll(".hihat");
   let grainDivs = document.querySelectorAll(".grains");
+  const downsampling = document.getElementById('downsamplingSlider')
+  const downsamplingValue = document.getElementById('downsamplingRange')
+  const bits = document.getElementById('bitsSlider')
+  const bitsValue = document.getElementById('bitsRange')
 
   let kicks = Array.prototype.slice.call(kickDivs);
   let snares = Array.prototype.slice.call(snareDivs);
@@ -173,9 +212,7 @@ window.onload = function() {
 
   };
 
-
   }());
-
 
   //SYNTHESISED SOUNDS
 
@@ -191,10 +228,10 @@ window.onload = function() {
 
     gainOsc.gain.setValueAtTime(1, time);
     gainOsc.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
-    gainOsc.connect(audioContext.destination);
+    // gainOsc.connect(audioContext.destination);
     gainOsc2.gain.setValueAtTime(1, time);
     gainOsc2.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
-    gainOsc2.connect(audioContext.destination);
+    // gainOsc2.connect(audioContext.destination);
     osc.frequency.setValueAtTime(120, time);
     osc.frequency.exponentialRampToValueAtTime(0.001, time + 0.5);
     osc2.frequency.setValueAtTime(50, time);
@@ -211,6 +248,7 @@ window.onload = function() {
     osc2.start(time);
     osc.stop(time + 0.9);
     osc2.stop(time + 0.9);
+    
 
   };
 
@@ -443,4 +481,4 @@ window.onload = function() {
 
 };
 
-//First commit from different macbook
+
